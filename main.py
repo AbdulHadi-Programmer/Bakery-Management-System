@@ -59,7 +59,7 @@ class Product:
         Returns:
         The calculated tax amount.
         """
-        tax_amount = (self.price * 17) / 100
+        tax_amount = (self.price * 18) / 100
         return tax_amount
 
     def display_main_stock_level(self):
@@ -158,7 +158,7 @@ class Bread(Product):
     def __init__(self, name, price=0, quantity=0, type="", size=""):
         super().__init__(name, price, quantity, size)
         self.type = type
-        self.price += self.calculate_percentage(self.price, 10)  # Example: Increase price by 10%
+        self.price += self.calculate_percentage(10)  # Example: Increase price by 10%
 
     def display_info(self):
         # Size:  Small, Medium, Large, Extra Large
@@ -203,9 +203,9 @@ cake.update_info("New Chocolate Cake", 29.99, 3, "Medium")
 cake.display_info()
 
 # Calculate and display the percentage
-part_value = 2
+# part_value = 2
 whole_value = 50
-percentage_result = cake.calculate_percentage(part_value, whole_value)
+percentage_result = cake.calculate_percentage(whole_value)
 print(f"The percentage is: {percentage_result}%")
 
 
@@ -223,3 +223,72 @@ cake.remove_stock(1)
 
 # Display the main stock level after removing stock
 cake.display_main_stock_level()
+
+# Employee Management System:
+# Add, update, or remove employee details.
+# Track employee shifts and responsibilities.
+class Employee:
+    def __init__(self, name, phone, position, salary):
+        self.name = name
+        self.phone = phone
+        self.position = position
+        self.salary = salary 
+        self.salary_history = []
+
+    def display_info(self):
+        print(f'Name: {self.name}\t Contact Number: {self.phone}\t\nPosition: {self.position}\t Salary: {self.salary}')
+
+    def update_info(self, new_salary, new_position):
+        self.salary = new_salary
+        self.position = new_position
+
+    def total_salary(self):
+        try:
+            user = int(input("Enter the Option:-\n1) See Your Salary List\n2) Add Salary\n*) Option:"))
+
+            if user == 1:
+                for salary in self.salary_history:
+                    print(f"Added Salary: {salary}")
+
+            elif user == 2:
+                add_salary = int(input("Enter The Additional Salary: "))
+                if add_salary <= 0:
+                    print("Invalid salary amount.")
+                    self.salary_history.append(add_salary)
+                    print(f"The Total Salary list: {self.add_salary}")
+                elif add_salary <= self.salary:
+                    print("Salary is not greater than the current salary.")
+                else:
+                    self.salary_history.append(add_salary)
+                    print(f"Salary of {add_salary} added successfully.")
+
+            else:
+                print("Invalid option. Please enter 1 or 2.")
+
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+    
+            
+# Create instances of the Employee class
+employee1 = Employee("John Doe", "123-456-7890", "Baker", 50000)
+employee2 = Employee("Jane Smith", "987-654-3210", "Cashier", 45000)
+
+# Display initial information for employees
+print()
+employee1.display_info()
+employee2.display_info()
+employee2.display_info()
+employee2.display_info()
+
+# Update information for an employee
+employee1.update_info(55000, "Head Baker")
+employee1.display_info()
+
+# Use the total_salary method to add and display salary history
+employee1.total_salary()
+employee1.total_salary()
+employee1.total_salary()
+employee2.total_salary()
+employee2.total_salary()
+employee2.total_salary()
+
